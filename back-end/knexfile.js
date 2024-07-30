@@ -9,7 +9,7 @@ const path = require("path");
 
 const {
   DATABASE_URL = "postgresql://postgres@localhost/postgres",
-  DATABASE_URL_DEVELOPMENT = "postgresql://postgres@localhost/postgres",
+  DATABASE_URL_DEVELOPMENT = "postgresql://restaurant_reservation_mxnb_user:2XCRxTM5sVxLyOGAa5KS6M1DReW0od2U@dpg-cqgkovl2ng1s73fcs4ig-a.oregon-postgres.render.com/restaurant_reservation_mxnb?ssl=true",
   DATABASE_URL_TEST = "postgresql://postgres@localhost/postgres",
   DATABASE_URL_PREVIEW = "postgresql://postgres@localhost/postgres",
   DEBUG,
