@@ -7,9 +7,15 @@ const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
  * List handler for reservation resources
  */
 async function list(req, res) {
-  res.json({
-    data: [],
-  });
+  const { date } = req.query;
+  const { mobile_number } = req.query;
+  let data;
+
+  if (date) {
+    data = await service.listByDate(date);
+  }
+  
+  res.json({ data });
 }
 
 async function create(req, res) {
@@ -17,6 +23,6 @@ async function create(req, res) {
 }
 
 module.exports = {
-  list,
+  list: asyncErrorBoundary(list),
   create: asyncErrorBoundary(create),
 };
