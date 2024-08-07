@@ -48,6 +48,18 @@ function NewReservation() {
       .catch(setError);
   };
 
+  const handlePhoneNumber = (event) => {
+    // const phoneNumber = document.querySelector("#mobile_number");
+    const phoneNumber = event.target;  
+    phoneNumber.addEventListener("invalid", ({ target }) => {
+      target.setCustomValidity("Please enter phone number in xxx-xxx-xxxx format");
+    });
+    phoneNumber.addEventListener("change", ({ target }) => {
+      target.setCustomValidity("");
+    });
+
+  }
+
   return (
     <main>
       <h1>New Reservation</h1>
@@ -56,6 +68,7 @@ function NewReservation() {
         formData={reservationForm}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
+        handlePhoneNumber={handlePhoneNumber}
       />
     </main>
   );

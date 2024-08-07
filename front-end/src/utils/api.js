@@ -79,3 +79,13 @@ export async function createReservation(reservation, signal) {
   };
   return await fetchJson(url, options);
 }
+
+// Search reservations by phone number
+export async function searchByPhoneNumber(mobile_number, signal) {
+  const url = new URL(
+    `${API_BASE_URL}/reservations?mobile_number=${mobile_number}`
+  );
+  return await fetchJson(url, { signal })
+    .then(formatReservationDate)
+    .then(formatReservationTime);
+}
