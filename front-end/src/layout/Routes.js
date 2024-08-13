@@ -4,6 +4,7 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import Dashboard from "../dashboard/Dashboard";
 import NewReservation from "../reservations/NewReservation";
 import SearchReservation from "../reservations/SearchReservation";
+import NewTable from "../tables/NewTable";
 import NotFound from "./NotFound";
 
 // Import Utility Functions
@@ -35,6 +36,9 @@ function Routes() {
       </Route>
       <Route exact={true} path="/reservations">
         <Redirect to={"/dashboard"} />
+      </Route>
+      <Route path="/tables/new">
+        <NewTable />
       </Route>
       <Route path="/search">
         <SearchReservation />

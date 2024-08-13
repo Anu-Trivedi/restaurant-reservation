@@ -59,7 +59,7 @@ function validatePeopleProperty(req, res, next) {
   } else {
     return next({
       status: 400,
-      message: `Number of guests must be a number`,
+      message: `Number of people must be a number`,
     });
   }
 }
@@ -78,7 +78,7 @@ function validateDateProperty(req, res, next) {
   } else {
     return next({
       status: 400,
-      message: `Reservation Date must be a date.`,
+      message: `reservation_date must be a date.`,
     });
   }
 }
@@ -89,7 +89,7 @@ function validateDateIsNotInThePast(req, res, next) {
   if (day < new Date()) {
     return next({
       status: 400,
-      message: `Only future reservations are allowed.`,
+      message: `Reservation must be in the future and reservation_time must be between 10:30 AM and 9:30 PM.`,
     });
   } else {
     next();
@@ -101,7 +101,7 @@ function validateTimeProperty(req, res, next) {
   if (reservation_time < "10:30" || reservation_time > "21:30") {
     return next({
       status: 400,
-      message: `Reservation Time must be between 10:30 AM and 9:30 PM.`,
+      message: `reservation_time must be between 10:30 AM and 9:30 PM.`,
     });
   } else {
     next();

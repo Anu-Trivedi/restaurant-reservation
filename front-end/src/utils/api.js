@@ -89,3 +89,21 @@ export async function searchByPhoneNumber(mobile_number, signal) {
     .then(formatReservationDate)
     .then(formatReservationTime);
 }
+
+// Lists all tables
+export async function listTable(signal) {
+  const url = new URL(`${API_BASE_URL}/tables`);
+  return await fetchJson(url, { headers, signal }, []);
+}
+
+// Creates a table
+export async function createTable(table, signal) {
+  const url = `${API_BASE_URL}/tables`;
+  const options = {
+    method: "POST",
+    headers,
+    body: JSON.stringify({ data: table }),
+    signal,
+  };
+  return await fetchJson(url, options);
+}
