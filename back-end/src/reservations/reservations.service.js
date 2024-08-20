@@ -14,6 +14,19 @@ function create(reservation) {
     .then((createdReservation) => createdReservation[0]);
 }
 
+function read(reservation_id) {
+  return knex("reservations").select("*").where({ reservation_id }).first();
+}
+
+function updateStatus(updatedReservation) {
+  return knex("reservations")
+    .where({ reservation_id: updatedReservation.reservation_id })
+    .whereNot({ status: "finished" })
+    .update(updatedReservation, "*")
+    .then((updatedRecords) => updatedRecords[0]);
+}
+
+
 function searchByPhoneNumber(mobile_number) {
   return knex("reservations")
     .whereRaw(
@@ -26,5 +39,7 @@ function searchByPhoneNumber(mobile_number) {
 module.exports = {
   listByDate,
   create,
+  read,
+  updateStatus,
   searchByPhoneNumber,
 };

@@ -269,7 +269,7 @@ describe("US-04 - Seat reservation - E2E", () => {
           .innerText.toLowerCase()
           .includes("seat");
       }, hrefSelector);
-
+ 
       expect(containsSeat).toBe(true);
     });
   });

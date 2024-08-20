@@ -89,7 +89,7 @@ function validateDateIsNotInThePast(req, res, next) {
   if (day < new Date()) {
     return next({
       status: 400,
-      message: `Reservation must be in the future and reservation_time must be between 10:30 AM and 9:30 PM.`,
+      message: `Reservation must be in the future.`,
     });
   } else {
     next();
@@ -183,6 +183,19 @@ async function create(req, res) {
   res.status(201).json({ data: await service.create(req.body.data) });
 }
 
+async function read(req, res, next) {
+  res.status(200).json({ data: res.locals.reservation });
+}
+
+async function update(req, res, next) {
+  const updatedReservation = {
+    ...req.body.data,
+    reservation_id: res.locals.reservation.reservation_id,
+  };
+  res.json({ data: await service.updateStatus(updatedReservation) });
+}
+
+
 module.exports = {
   list: asyncErrorBoundary(list),
   create: [
@@ -195,5 +208,26 @@ module.exports = {
     validateTimeProperty,
     validateReservationIsBooked,
     asyncErrorBoundary(create),
+  ],
+  read: [
+    asyncErrorBoundary(validateReservationExists),
+    asyncErrorBoundary(read),
+  ],
+  update: [
+    asyncErrorBoundary(validateReservationExists),
+    validateStatusProperty,
+    validateReservationIsFinished,
+    asyncErrorBoundary(update),
+  ],
+  updateReservation: [
+    asyncErrorBoundary(validateReservationExists),
+    validateBodyHasData,
+    validateHasRequiredProperties,
+    validatePeopleProperty,
+    validateDateProperty,
+    validateDateIsNotInThePast,
+    validateTimeProperty,
+    validateReservationIsBooked,
+    asyncErrorBoundary(update),
   ],
 };

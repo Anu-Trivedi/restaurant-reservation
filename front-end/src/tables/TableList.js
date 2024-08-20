@@ -5,7 +5,14 @@ function TableList({ tables, handleFinishReservation }) {
     <tr key={table.table_id}>
       <td>{table.table_name}</td>
       <td>{table.capacity}</td>
-      <td data-table-id-status={table.table_id}>
+      <td
+        data-table-id-status={table.table_id}
+        className={
+          table.reservation_id 
+            ? "text-light bg-danger"
+            : "text-light bg-info"
+        }
+      >
         {table.reservation_id ? "Occupied" : "Free"}
       </td>
       {table.reservation_id !== null ? (
@@ -32,7 +39,7 @@ function TableList({ tables, handleFinishReservation }) {
       <div className="table-responsive">
         <table className="table table-sm w-75 text-center mb-5">
           <thead>
-            <tr>
+            <tr className="text-secondary bg-light bg-gradient">
               <th scope="col">Table Name</th>
               <th scope="col">Capacity</th>
               <th scope="col">Status</th>

@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 
 // Import Utility Functions
 import { next, previous, today } from "../utils/date-time";
-import { listReservations, listTable } from "../utils/api";
+import { listReservations, listTable, finishReservation } from "../utils/api";
 
 // Import Components
 import ReservationList from "../reservations/ReservationList";
@@ -34,6 +34,24 @@ function Dashboard({ date }) {
     return () => abortController.abort();
   }
 
+  // Functionality for finishing reservations
+  const handleFinishReservation = async (table_id) => {
+    const abortController = new AbortController();
+    const confirm = window.confirm(
+      "Is this table ready to seat new guests?\nThis cannot be undone."
+    );
+    if (confirm) {
+      try {
+        await finishReservation(table_id, abortController.signal);
+        loadDashboard();
+        loadTables();
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    return () => abortController.abort();
+  };
+
   // Functionality for Previous and Next day buttons
   function previousDay(date) {
     const previousDate = previous(date);
@@ -52,7 +70,6 @@ function Dashboard({ date }) {
     listTable(abortController.signal).then(setTables);
     return () => abortController.abort();
   }
-
 
   return (
     <main>
@@ -94,6 +111,7 @@ function Dashboard({ date }) {
       />
       <TableList
         tables={tables}
+        handleFinishReservation={handleFinishReservation}
       />
     </main>
   );

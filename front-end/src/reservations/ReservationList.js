@@ -1,3 +1,8 @@
+import React, { Fragment } from "react";
+
+// Import Components
+import CancelReservation from "./CancelReservation";
+
 function ReservationList({ reservations, loadDashboard }) {
   const reservationsRows = reservations.map((reservation) => (
     <tr key={reservation.reservation_id}>
@@ -7,10 +12,20 @@ function ReservationList({ reservations, loadDashboard }) {
       <td>{reservation.reservation_date}</td>
       <td>{reservation.reservation_time}</td>
       <td>{reservation.people}</td>
-      <td data-reservation-id-status={reservation.reservation_id}>
+
+      <td
+        data-reservation-id-status={reservation.reservation_id}
+        className={
+          reservation.status === "booked"
+            ? "text-light bg-info"
+            : reservation.status === "cancelled"
+            ? "text-light bg-danger"
+            : "text-light bg-success"
+        }
+      >
         {reservation.status}
       </td>
-      
+
       {reservation.status === "booked" ? (
         <>
           <td>
@@ -30,7 +45,10 @@ function ReservationList({ reservations, loadDashboard }) {
             </a>
           </td>
           <td>
-            <button className="btn btn-danger btn-sm">Cancel</button>
+            <CancelReservation
+              reservation_id={reservation.reservation_id}
+              loadDashboard={loadDashboard}
+            />
           </td>
         </>
       ) : null}
@@ -43,9 +61,9 @@ function ReservationList({ reservations, loadDashboard }) {
         <h4>Reservations</h4>
       </div>
       <div className="table-responsive">
-        <table className="table table-sm w-75 striped text-center mb-5">
+        <table className="table table-sm w-80 striped text-center mb-5">
           <thead>
-            <tr>
+            <tr className="text-secondary bg-light bg-gradient">
               <th scope="col">First Name</th>
               <th scope="col">Last Name</th>
               <th scope="col">Mobile Number</th>
@@ -53,6 +71,9 @@ function ReservationList({ reservations, loadDashboard }) {
               <th scope="col">Reservation Time</th>
               <th scope="col">#People</th>
               <th scope="col">Status</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody className="table-group-divider">{reservationsRows}</tbody>

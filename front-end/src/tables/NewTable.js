@@ -30,7 +30,6 @@ function NewTable() {
   // Submit handler function
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("FE submit - tables CREATE REQUEST");
     tableForm.capacity = Number(tableForm.capacity);
 
     createTable(tableForm)
