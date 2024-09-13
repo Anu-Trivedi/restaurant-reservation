@@ -67,8 +67,8 @@ function validatePeopleProperty(req, res, next) {
 function validateDateProperty(req, res, next) {
   const { reservation_date = {} } = req.body.data;
   const date = Date.parse(reservation_date);
-  const dayOfTheWeek = new Date(date);
-  if (dayOfTheWeek.getUTCDay() == 2) {
+  const dayOfTheWeek = new Date(date).getUTCDay();
+  if (dayOfTheWeek === 2) {
     return next({
       status: 400,
       message: `Reservation Date must not be a Tuesday. The restaurant is closed.`,
@@ -97,6 +97,7 @@ function validateDateIsNotInThePast(req, res, next) {
 }
 
 function validateTimeProperty(req, res, next) {
+  console.log("INSIDE validateTimeProperty----");
   const { reservation_time = {} } = req.body.data;
   if (reservation_time < "10:30" || reservation_time > "21:30") {
     return next({

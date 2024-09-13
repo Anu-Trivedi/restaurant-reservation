@@ -54,6 +54,7 @@ describe("US-02 - Create reservation on a future, working date - E2E", () => {
       });
 
       const alerts = await page.$$(".alert-danger");
+      console.log("alerts", alerts);
       expect(alerts.length).toBeGreaterThan(0);
     });
 
@@ -72,6 +73,7 @@ describe("US-02 - Create reservation on a future, working date - E2E", () => {
       });
 
       const alerts = await page.$$(".alert-danger");
+      console.log("ALERTS::", alerts);
       expect(alerts.length).toBeGreaterThan(0);
     });
   });

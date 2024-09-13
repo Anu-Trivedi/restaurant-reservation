@@ -4,6 +4,9 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 // Import Utility Functions
 import { createReservation } from "../utils/api";
 import { formatAsDate } from "../utils/date-time";
+// import { isNotOnTuesday } from "../utils/date-time";
+// import { isInTheFuture } from "../utils/date-time";
+
 
 // Import Components
 import ReservationForm from "./ReservationForm";
@@ -35,9 +38,22 @@ function NewReservation() {
     });
   };
 
+  // const findDateAndTimeValidity = (date, errors) => {
+  //   isNotOnTuesday(date, errors);
+  //   isInTheFuture(date, errors);
+  // };
+
   // Submit handler function
   const handleSubmit = (event) => {
     event.preventDefault();
+    
+    const errors = [];
+    // findDateAndTimeValidity(reservationForm.reservation_date, errors);
+    if (errors.length) {
+      setError({ message: errors });
+      return;
+    }
+
     reservationForm.people = Number(reservationForm.people);
     createReservation(reservationForm)
       .then(() => {
