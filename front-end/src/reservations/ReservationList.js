@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
 
 // Import Components
 import CancelReservation from "./CancelReservation";
@@ -29,20 +30,31 @@ function ReservationList({ reservations, loadDashboard }) {
       {reservation.status === "booked" ? (
         <>
           <td>
-            <a
+            {/* <a
               href={`/reservations/${reservation.reservation_id}/seat`}
               className="btn btn-primary btn-sm ml-3"
+            > */}
+            <Link
+              className="btn btn-primary btn-sm ml-3"
+              to={`/reservations/${reservation.reservation_id}/seat`}
             >
               Seat
-            </a>
+            </Link>
+            {/* </a> */}
           </td>
           <td>
-            <a
+            {/* <a
               href={`/reservations/${reservation.reservation_id}/edit`}
               className="btn btn-secondary btn-sm"
+            > */}
+            <Link
+              className="btn btn-secondary btn-sm"
+              to={`/reservations/${reservation.reservation_id}/edit`}
             >
               Edit
-            </a>
+            </Link>
+
+            {/* </a> */}
           </td>
           <td>
             <CancelReservation
