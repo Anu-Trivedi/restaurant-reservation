@@ -4,8 +4,6 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 // Import Utility Functions
 import { createReservation } from "../utils/api";
 import { formatAsDate } from "../utils/date-time";
-// import { isNotOnTuesday } from "../utils/date-time";
-// import { isInTheFuture } from "../utils/date-time";
 
 
 // Import Components
@@ -38,17 +36,12 @@ function NewReservation() {
     });
   };
 
-  // const findDateAndTimeValidity = (date, errors) => {
-  //   isNotOnTuesday(date, errors);
-  //   isInTheFuture(date, errors);
-  // };
 
   // Submit handler function
   const handleSubmit = (event) => {
     event.preventDefault();
     
     const errors = [];
-    // findDateAndTimeValidity(reservationForm.reservation_date, errors);
     if (errors.length) {
       setError({ message: errors });
       return;
@@ -64,17 +57,16 @@ function NewReservation() {
       .catch(setError);
   };
 
-  const handlePhoneNumber = (event) => {
-    // const phoneNumber = document.querySelector("#mobile_number");
-    const phoneNumber = event.target;  
-    phoneNumber.addEventListener("invalid", ({ target }) => {
-      target.setCustomValidity("Please enter phone number in xxx-xxx-xxxx format");
-    });
-    phoneNumber.addEventListener("change", ({ target }) => {
-      target.setCustomValidity("");
-    });
+  // const handlePhoneNumber = (event) => {
+  //   const phoneNumber = event.target;  
+  //   phoneNumber.addEventListener("invalid", ({ target }) => {
+  //     target.setCustomValidity("Please enter phone number in xxx-xxx-xxxx format");
+  //   });
+  //   phoneNumber.addEventListener("change", ({ target }) => {
+  //     target.setCustomValidity("");
+  //   });
 
-  }
+  // }
 
   return (
     <main>
@@ -84,7 +76,7 @@ function NewReservation() {
         formData={reservationForm}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
-        handlePhoneNumber={handlePhoneNumber}
+        // handlePhoneNumber={handlePhoneNumber}
       />
     </main>
   );

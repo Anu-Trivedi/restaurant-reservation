@@ -1,8 +1,28 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-function ReservationForm({ handleChange, handleSubmit, formData, handlePhoneNumber }) {
+function ReservationForm({ handleChange, handleSubmit, formData }) {
   const history = useHistory();
+
+  // Adds phone number hyphens automatically
+  function handlePhoneNumberFormatting(event) {
+    const input = event.target;
+
+    const phoneNumber = input.value.replace(/\D/g, "");
+    if (phoneNumber.length > 0) {
+      let formattedPhoneNumber = "";
+      formattedPhoneNumber += phoneNumber.substr(0, 3);
+      if (phoneNumber.length > 3) {
+        formattedPhoneNumber += "-";
+      }
+      formattedPhoneNumber += phoneNumber.substr(3, 3);
+      if (phoneNumber.length > 6) {
+        formattedPhoneNumber += "-";
+      }
+      formattedPhoneNumber += phoneNumber.substr(6, 4);
+      input.value = formattedPhoneNumber;
+    }
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -43,9 +63,7 @@ function ReservationForm({ handleChange, handleSubmit, formData, handlePhoneNumb
             pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
             placeholder="xxx-xxx-xxxx"
             onChange={handleChange}
-            // onInvalid="setCustomValidity('Not Valid')"
-            // onInput={handlePhoneNumberFormatting}
-            onInput = {handlePhoneNumber}
+            onInput={handlePhoneNumberFormatting}
             value={formData.mobile_number}
             required
           />
