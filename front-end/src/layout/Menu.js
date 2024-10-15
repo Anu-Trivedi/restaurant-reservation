@@ -17,12 +17,11 @@ function Menu() {
         >
           <div className="sidebar-brand-text mx-3">
             <span>
-              Periodics Table
-              {/* <img
+               <img
                   src="https://res.cloudinary.com/dlsnciivc/image/upload/v1721973340/logo-white_ivtoi2.png"
                   style={{ width: "60px", height: "60px" }}
                   alt="Periodics Table"
-                /> */}
+                /> 
             </span>
           </div>
         </Link>
